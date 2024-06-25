@@ -1,4 +1,4 @@
-import connectToDB from "@/config/database";
+import connectToDB from "@/database";
 import User from "@/models/user";
 import { NextResponse } from "next/server";
 
@@ -10,19 +10,20 @@ export async function POST(req) {
     if (newUser) {
       return NextResponse.json({
         success: true,
-        message: "User registered!",
+        message: "User registered",
       });
     } else {
-      return NextResponse.json({
-        success: false,
-        message: "Failed to register the user. Please try again!",
-      });
+        return NextResponse.json({
+            success: false,
+            message: "failed to register the user ! Please try again",
+          });  
     }
   } catch (e) {
-    console.log(e);
+    console.log('catch e at api/user/route.js', e);
+
     return NextResponse.json({
       success: false,
-      message: "Something went wrong. Please try again",
+      message: "Something went wrong ! Please try again",
     });
   }
 }
