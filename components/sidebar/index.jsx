@@ -6,6 +6,7 @@ import React, { useContext } from "react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { TbBrandProducthunt } from "react-icons/tb";
 import { PiUsersFourLight } from "react-icons/pi";
+import { useSession } from "next-auth/react";
 
 const menuItems = [
   {
@@ -30,9 +31,14 @@ const menuItems = [
 
 export default function Sidebar() {
   const { sideBarOpen, setSideBarOpen } = useContext(GlobalContext);
+  const { status } = useSession();
   const pathName = usePathname();
   const router = useRouter();
   const handlenavigate = (getMenuItem) => {
+    if (status === 'unauthenticated') {
+      router.push('/unauth-page');
+      return 
+    }
     router.push(getMenuItem.path);
   };
 
