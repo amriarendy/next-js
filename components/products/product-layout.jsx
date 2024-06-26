@@ -16,11 +16,23 @@ const initialFormData = {
 export default function ProductLayout({children}) {
     const [ showModal, setShowModal ] = useState(false);
     const [ formData, setFormData ] = useState(initialFormData);
+    console.log(formData);
+    async function handleAddProduct() {
+        const res = await fetch('api/product/add-product', {
+            method: 'POST',
+            headers: {
+                'Content-type' : 'application/json'
+            },
+            body : JSON.stringify(formData)
+        });
+        const data = await res.json();
+        console.log(data);
+    }
     return (
-        <div className="">
+        <div>
             <Button onClick={() => setShowModal(true)} text={"Add New Product"} />
             {children}
-            <Modal show={showModal} setShow={setShowModal} formData={formData} setFormData={setFormData} formControls={productFormControls} />
+            <Modal show={showModal} setShow={setShowModal} formData={formData} setFormData={setFormData} formControls={productFormControls} onAdd={handleAddProduct} />
         </div>
     )
 }

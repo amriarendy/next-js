@@ -6,13 +6,13 @@ import GoogleProvider from "next-auth/providers/google";
 const authOptions = {
   providers: [
     GoogleProvider({
-      clientId: 'PUT_YOUR_CLIENT_ID',
-      clientSecret: 'TYPE_YOUR_CLIENT_SECRET'
+      clientId: "PUT_YOUR_CLIENT_ID",
+      clientSecret: "TYPE_YOUR_CLIENT_SECRET",
     }),
   ],
   callbacks: {
     async signIn({ user, account }) {
-      console.log('this api/auth/nextauth/route.js: ');
+      console.log("this api/auth/nextauth/route.js: ");
       if (account.providers === "google") {
         const { name, email } = user;
         try {
