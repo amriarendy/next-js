@@ -1,5 +1,5 @@
 import connectToDB from "@/database";
-import visitor from "@/models/visitors";
+import Visitor from "@/models/visitors";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -8,7 +8,7 @@ export async function POST(req) {
   try {
     await connectToDB();
     const extractData = await req.json();
-    const newlyCreatedVisitorsInfo = await visitor.create(extractData);
+    const newlyCreatedVisitorsInfo = await Visitor.create(extractData);
     if (newlyCreatedVisitorsInfo) {
       return NextResponse.json({
         success: true,

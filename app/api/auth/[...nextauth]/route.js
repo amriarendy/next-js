@@ -12,8 +12,7 @@ const authOptions = {
   ],
   callbacks: {
     async signIn({ user, account }) {
-      console.log("this api/auth/nextauth/route.js: ");
-      if (account.providers === "google") {
+      if (account.provider === "google") {
         const { name, email } = user;
         try {
           await connectToDB();

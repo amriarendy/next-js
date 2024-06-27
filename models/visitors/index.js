@@ -1,13 +1,17 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
-const VisitorsSchema = new mongoose.Schema({
+const VisitorsSchema = new mongoose.Schema(
+  {
     visitors: Number,
     location: String,
     device: String,
     premiumUserNo: Number,
     month: String,
-}, {timestamps: true});
+  },
+  { timestamps: true }
+);
 
-const visitor = mongoose.models.Visitors || mongoose.model("Visitor", VisitorsSchema);
+const Visitor =
+  mongoose.models.Visitors || mongoose.model("Visitors", VisitorsSchema);
 
-export default visitor;
+export default Visitor;
