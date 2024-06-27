@@ -1,5 +1,5 @@
 import connectToDB from "@/database";
-import Product from "@/models/product";
+import visitor from "@/models/visitors";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -8,16 +8,16 @@ export async function POST(req) {
   try {
     await connectToDB();
     const extractData = await req.json();
-    const newlyCreatedProduct = await Product.create(extractData);
-    if (newlyCreatedProduct) {
+    const newlyCreatedVisitorsInfo = await visitor.create(extractData);
+    if (newlyCreatedVisitorsInfo) {
       return NextResponse.json({
         success: true,
-        message: `Product added successfully`,
+        message: `Visitor added successfully`,
       });
     } else {
       return NextResponse.json({
         success: false,
-        message: "failed to add a product, pleasen try after some time",
+        message: "failed to add a visitor, pleasen try after some time",
       });
     }
   } catch (error) {

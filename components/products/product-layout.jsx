@@ -4,6 +4,7 @@ import { useState } from "react"
 import Button from "../FormControls/button"
 import Modal from "../Modal"
 import { productFormControls } from "@/utils/config"
+import { useRouter } from "next/navigation"
 
 const initialFormData = {
     name: '',
@@ -16,6 +17,7 @@ const initialFormData = {
 export default function ProductLayout({children}) {
     const [ showModal, setShowModal ] = useState(false);
     const [ formData, setFormData ] = useState(initialFormData);
+    const router = useRouter();
     console.log(formData);
     async function handleAddProduct() {
         const res = await fetch('api/product/add-product', {
@@ -26,6 +28,14 @@ export default function ProductLayout({children}) {
             body : JSON.stringify(formData)
         });
         const data = await res.json();
+        if (data && data.success) {
+            setFormData(initialFormData);
+            setShowModal(false);
+            router.refresh();
+        } else {
+            setFormData(initialFormData);
+            setShowModal(false);
+        }
         console.log(data);
     }
     return (
