@@ -365,7 +365,7 @@ export const yearlyAnalyticsChartOptions = {
       },
     },
     min: 0,
-    max: 20000,
+    max: 1000,
   },
 };
 

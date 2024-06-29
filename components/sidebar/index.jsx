@@ -12,7 +12,7 @@ const menuItems = [
   {
     id: "dashboard",
     label: "Dashboard",
-    path: "/dashboard",
+    path: "/",
     icon: <LuLayoutDashboard size={25} />,
   },
   {

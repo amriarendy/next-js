@@ -1,8 +1,8 @@
-import { Inter } from "next/font/google";
+import GlobalState from "@/context";
 import "./globals.css";
+import { Inter } from "next/font/google";
 import Sidebar from "@/components/sidebar";
 import Header from "@/components/header";
-import GlobalState from "@/context";
 import NextAuthProvider from "@/auth-provider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
           <GlobalState>
             <div className="flex h-screen overflow-hidden">
               <Sidebar />
+
               <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
                 <Header />
                 <main>
