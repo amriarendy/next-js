@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from "./Auth.module.css"
+import LoginViews from "@/views/auth/login";
 
 const LoginPage = () => {
     const { push } = useRouter();
@@ -9,11 +11,7 @@ const LoginPage = () => {
 
     return (
         <>
-            <div>
-                <h1>Login Page</h1>
-                <button onClick={() => handlerLogin()}>Login</button>
-                <p>Don't have account <Link href={"/auth/register"}>Register</Link></p>
-            </div>
+            <LoginViews/>
         </>
     )
 }

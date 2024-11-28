@@ -4,7 +4,7 @@ const Navbar = () => {
     return (
         <>
             <div className={styles.navbar}>
-                <div>Navbar</div>
+                <div className="big">Navbar</div>
             </div>
         </>
     )
