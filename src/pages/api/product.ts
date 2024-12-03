@@ -1,36 +1,19 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { retriveData } from "@/lib/firebase/service";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
-  code: number,
-  status: boolean,
-  data: {
-    id: number,
-    name: string,
-    price: number,
-    size: string
-  }[]
+  code: number;
+  status: boolean;
+  data: any;
 };
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
-  const data = [{
-    id: 1,
-    name: "Tshirt",
-    price: 50000,
-    size: "xl",
-  },{
-    id: 2,
-    name: "Cloth",
-    price: 150000,
-    size: "l",
-  },{
-    id: 3,
-    name: "Trousers",
-    price: 300000,
-    size: "xl",
-  }]
+  const data = await retriveData("products");
+  console.log(data);
+  
   res.status(200).json({ code: 200, status: true, data });
 }
