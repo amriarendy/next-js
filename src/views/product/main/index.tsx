@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Product.module.scss"
 import { typeProduct } from "@/types/product.type";
 
@@ -11,7 +12,7 @@ const ProductView = ({ products }: {products: typeProduct[]}) => {
                     {products.length > 0 ? (
                         <>
                             {products.map((product: typeProduct) => (
-                                <div key={product.id} className={styles.product__content__item}>
+                                <Link href={`/store/${product.id}`} key={product.id} className={styles.product__content__item}>
                                     <div className={styles.product__content__item__image}>
                                         <img src={product.image} alt={product.name} />
                                     </div>
@@ -21,7 +22,7 @@ const ProductView = ({ products }: {products: typeProduct[]}) => {
                                         style: "currency",
                                         currency: "IDR"
                                     })}</p>
-                                </div>
+                                </Link>
                             ))}
                         </>
                     ) : (
