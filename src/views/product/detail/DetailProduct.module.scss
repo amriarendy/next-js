@@ -1,6 +1,7 @@
 .productDetail {
     width: 25%;
     padding: 10px;
+    margin: 0 auto;
         width: 25%;
         padding: 10px;
         &__name {
@@ -16,6 +17,11 @@
             font-weight: bold;
             margin-top: 10px;
     }
+}
+
+.title {
+    text-align: center;
+    font-size: 32px;
 }
 
 @keyframes blinking {

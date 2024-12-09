@@ -3,7 +3,8 @@ import styles from "./DetailProduct.module.scss"
 
 const DetailProduct = ({product}: {product: typeProduct}) => {
     return (
-        <>
+    <>
+        <h1 className={styles.title}>Detail Product</h1>
         <div className={styles.productDetail}>
         <div className={styles.productDetail__image}>
             <img src={product.image} alt={product.name} />
@@ -14,7 +15,8 @@ const DetailProduct = ({product}: {product: typeProduct}) => {
             style: "currency",
             currency: "IDR"
         })}</p>
-    </div></>
+        </div>
+    </>
     )
 }
 
