@@ -7,7 +7,7 @@ const DetailProduct = ({product}: {product: typeProduct}) => {
         <h1 className={styles.title}>Detail Product</h1>
         <div className={styles.productDetail}>
         <div className={styles.productDetail__image}>
-            <img src={product.image} alt={product.name} />
+            <img src={product.image && product.image} alt={product.name} />
         </div>
         <h4 className={styles.productDetail__name}>{product.name}</h4>
         <p className={styles.productDetail__category}>{product.category}</p>

@@ -13,7 +13,5 @@ export default async function handler(
   res: NextApiResponse<Data>,
 ) {
   const data = await retriveData("products");
-  console.log(data);
-  
   res.status(200).json({ code: 200, status: true, data });
 }

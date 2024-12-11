@@ -17,8 +17,9 @@ const ProductPage = (props: {products: typeProduct[] }) => {
         const res = await fetch('http://localhost:3000/api/product');
         const response = await res.json();
         return {
-        props: {
-            products: response.data
-        }
+          props: {
+              products: response.data
+          },
+          // revalidate: 10,
     }
 }
