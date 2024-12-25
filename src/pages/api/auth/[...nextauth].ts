@@ -1,3 +1,4 @@
+import { signInWithGoogle } from "@/lib/firebase/service";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google"
@@ -30,7 +31,7 @@ const authOptions: NextAuthOptions = {
         //             return null
         //         }
         //     }
-        // })
+        // }),
         GoogleProvider({
             clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || "",
             clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || "",
@@ -38,21 +39,28 @@ const authOptions: NextAuthOptions = {
     ],
     callbacks: {
         async jwt({token, account, profile, user}: any) {
-            if (account?.provider==="credentials") {
+            if (account?.provider === "credentials") {
                 token.email = user.email;
                 token.fullname = user.fullname;
+                token.role = user.role;
             }
             if (account?.provider === "google") {
                 const data = {
                     fullname: user.name,
                     email: user.email,
                     image: user.image,
-                    type: "google"
+                    type: "google",
                 }
-                token.email = data.email;
-                token.fullname = data.fullname;
-                token.type = data.type;
-                token.image = data.image;
+
+                await signInWithGoogle(data, (result: {code: number, status: boolean, message: string, data: any}) => {
+                    if (result.status) {
+                        token.email = result.data.email;
+                        token.fullname = result.data.fullname;
+                        token.image = result.data.image;
+                        token.type = result.data.type;
+                        token.role = result.data.role;
+                    }
+                })
             }
             return token
         },

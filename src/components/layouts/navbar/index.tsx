@@ -9,11 +9,11 @@ const Navbar = () => {
         <>
             <div className={styles.navbar}>
                 <div className="big">Navbar</div>
-                <div>
-                    {data && data.user.fullname}{" "}
-                    { data && data.user.image && (
-                        <img src={data.user.image} alt={data.user.fullname} width={100} height={100} />
+                <div className={styles.profile} >
+                    { data?.user?.image && (
+                        <img src={data.user.image} alt={data.user.fullname} width={100} height={100} className={styles.avatar} />
                     )}
+                    {data && data.user.fullname}{" "}
                     {data ? (
                         <button className={styles.button} onClick={ ()=> signOut() }>Sign Out</button>
                     ) : (

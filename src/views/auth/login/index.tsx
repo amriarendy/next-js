@@ -46,8 +46,9 @@ const LoginViews = () => {
                                 <input id="password" type="password" name="password" placeholder="Password" className={styles.login__form__item__input} />
                             </div>
                             <button type="submit" className={styles.login__form__item__button} disabled={isLoading}>
-                                {isLoading ? "Loading..." : "Register"}
+                                {isLoading ? "Loading..." : "Login"}
                             </button>
+                        </form>
                             <button onClick={()=> signIn("google", {
                                 callbackUrl,
                                 redirect: false
@@ -55,9 +56,8 @@ const LoginViews = () => {
                             className={styles.login__form__item__google}>
                                 Sign In With Google
                             </button>
-                        </form>
                 </div>
-                <p className={styles.register__link}>Have already Account? Sign in <Link href={'/auth/login'}>Here</Link></p>
+                <p className={styles.register__link}>Have already Account? Sign in <Link href={'/auth/register'}>Here</Link></p>
         </div>
     )
 }
