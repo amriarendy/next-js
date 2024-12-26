@@ -1,5 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import styles from "./Navbar.module.css"
+import Script from "next/dist/client/script";
+import Image from "next/image"
 
 const Navbar = () => {
     const { data }: any = useSession();
@@ -8,10 +10,13 @@ const Navbar = () => {
     return (
         <>
             <div className={styles.navbar}>
-                <div className="big">Navbar</div>
+                <div className="big" id="title"></div>
+                <Script id="script-title" strategy="lazyOnload">
+                    {`document.getElementById('title').innerHTML = 'Navbar'`}
+                </Script>
                 <div className={styles.profile} >
                     { data?.user?.image && (
-                        <img src={data.user.image} alt={data.user.fullname} width={100} height={100} className={styles.avatar} />
+                        <Image src={data.user.image} alt={data.user.fullname} width={30} height={30} className={styles.avatar} />
                     )}
                     {data && data.user.fullname}{" "}
                     {data ? (

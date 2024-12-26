@@ -53,26 +53,26 @@ export async function signInWithGoogle(userData:any, callback: any) {
         id: doc.id,
         ...doc.data(),
     }));
-    
     if (data.length > 0) {
         userData.role = data[0].role
-        await updateDoc(doc(firestore, "users", data[0].id), userData).then(() => {
+        await updateDoc(doc(firestore, "users", data[0].id), userData)
+        .then(() => {
             callback({
                 code: 200,
                 status: true,
                 message: "Sign in with google success",
                 data: userData
-            }).catch(() => {
+                });
+            })
+            .catch(() => {
                 callback({
                     code: 400,
                     status: false,
                     message: "Sign in google failed"
                 })
             });
-        })
     } else {
         userData.role = "member"
-        console.log("signInWithGoogle: ", userData);
         await addDoc(collection(firestore, "users"), userData).then(() => {
             callback({
                 code: 200,

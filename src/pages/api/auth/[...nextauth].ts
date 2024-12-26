@@ -78,8 +78,6 @@ const authOptions: NextAuthOptions = {
             if ("role" in token) {
                 session.user.role = token.role
             }
-            console.log("session: ", session);
-            
             return session
         }
     }
