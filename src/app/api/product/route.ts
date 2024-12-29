@@ -19,6 +19,18 @@ const data = [
         price: 910000,
         image: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/erzfadfpnzgkxt0gn2ya/AIR+MAX+PLUS.png"
     },
+    {
+        id: 4,
+        title: 'Nike Air Max Plus 4',
+        price: 910000,
+        image: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/erzfadfpnzgkxt0gn2ya/AIR+MAX+PLUS.png"
+    },
+    {
+        id: 5,
+        title: 'Air Jordan 1 Hight OG',
+        price: 910000,
+        image: "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/eaf524f7-a9f7-4f70-a438-1b0480eb2540/NIKE+COURT+VISION+LO.png"
+    },
 ];
 
 export async function GET(requset: NextRequest) {

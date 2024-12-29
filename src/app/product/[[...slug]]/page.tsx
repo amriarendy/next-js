@@ -3,7 +3,11 @@ type DetailProductPageProps = { params: { slug: string[] }};
 async function getData() {
     // const res = await fetch("https://fakestoreapi.com/products");
     const res = await fetch("http://127.0.0.1:3000/api/product", {
-        cache: "no-store"
+        cache: "force-cache",
+        next: {
+            tags: ['product'],
+            revalidate: 3600 * 24,
+        },
     });
 
     if (!res.ok) {
@@ -20,7 +24,7 @@ export default async function ProductPage(props: DetailProductPageProps) {
         <div className="grid grid-cols-4 mt-5 place-items-center">
             {products.data.length > 0 &&
                 products.data.map((product: any) => (
-                    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" key={product.id}>
+                    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-3" key={product.id}>
                         <a href="#">
                             <img className="p-8 rounded-t-lg object-cover h-96 w-full" src={product.image} alt={product.title} />
                         </a>
