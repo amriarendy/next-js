@@ -24,7 +24,7 @@ export default function AdminProductPage() {
     };
 
     return (
-        <div>
+        <div className="w-3/6 h-96 bg-gray-300 rounded-[12px] flex justify-center items-center mr-5">
             <h2>Status Revalidate: {status}</h2>
             <button onClick={()=> revalidate()} className="bg-black text-yellow-50 m-5">Revalidate</button>
         </div>

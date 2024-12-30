@@ -1,9 +1,9 @@
-type DetailProductPageProps = { params: { slug: string[] }};
+type ProductPageProps = { params: { slug: string[] }};
 
 async function getData() {
-    // const res = await fetch("https://fakestoreapi.com/products");
+    // const res = await fetch("https://fakestoreapi.com/products", {cache: "no-store"});
     const res = await fetch("http://127.0.0.1:3000/api/product", {
-        cache: "force-cache",
+        cache: "no-store",
         next: {
             tags: ['product'],
             revalidate: 3600 * 24,
@@ -16,7 +16,7 @@ async function getData() {
     return res.json();
 }
 
-export default async function ProductPage(props: DetailProductPageProps) {
+export default async function ProductPage(props: ProductPageProps) {
     const { params } = props;
     const products = await getData();
 
@@ -37,12 +37,8 @@ export default async function ProductPage(props: DetailProductPageProps) {
                                 <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 my-5">Add to cart</a>
                             </div>
                         </div>
-                    </div>
-                    
+                    </div> 
                 ))}
-        
-        
-
                 
             {/* <h1 className="font-bold">{ params.slug ? "Detail Product Page" : "Product"}</h1>
             {params.slug && (
