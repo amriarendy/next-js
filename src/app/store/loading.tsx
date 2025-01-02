@@ -4,7 +4,7 @@ export default function Loading() {
             <div className="grid grid-cols-4 mt-5 place-items-center">
                 <div className="w-full max-w-sm bg-white border rounded-lg shadow dark:bg-gray-400 mt-3 h-96">
                     <a href="#">
-                        <img className="p-8 rounded-t-lg object-cover h-96 w-full" src="" alt="" />
+                        <img className="p-8 rounded-t-lg object-cover h-96 w-full" />
                     </a>
                     <div className="px-5 pb-5">
                         <a href="#">
@@ -17,7 +17,7 @@ export default function Loading() {
                 </div> 
                 <div className="w-full max-w-sm bg-white border rounded-lg shadow dark:bg-gray-400 mt-3 h-96">
                     <a href="#">
-                        <img className="p-8 rounded-t-lg object-cover h-96 w-full" src="" alt="" />
+                        <img className="p-8 rounded-t-lg object-cover h-96 w-full" />
                     </a>
                     <div className="px-5 pb-5">
                         <a href="#">
@@ -30,7 +30,7 @@ export default function Loading() {
                 </div> 
                 <div className="w-full max-w-sm bg-white border rounded-lg shadow dark:bg-gray-400 mt-3 h-96">
                     <a href="#">
-                        <img className="p-8 rounded-t-lg object-cover h-96 w-full" src="" alt="" />
+                        <img className="p-8 rounded-t-lg object-cover h-96 w-full" />
                     </a>
                     <div className="px-5 pb-5">
                         <a href="#">
@@ -43,7 +43,7 @@ export default function Loading() {
                 </div> 
                 <div className="w-full max-w-sm bg-white border rounded-lg shadow dark:bg-gray-400 mt-3 h-96">
                     <a href="#">
-                        <img className="p-8 rounded-t-lg object-cover h-96 w-full" src="" alt="" />
+                        <img className="p-8 rounded-t-lg object-cover h-96 w-full" />
                     </a>
                     <div className="px-5 pb-5">
                         <a href="#">

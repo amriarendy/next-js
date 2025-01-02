@@ -11,7 +11,7 @@ export default async function StorePage(props: StorePageProps) {
         <div className="grid grid-cols-4 mt-5 place-items-center">
             {products.data.length > 0 &&
                 products.data.map((product: any) => (
-                    <Link href={`/store/detail/${product.id}`} className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-3" key={product.id}>
+                    <Link href={`/store/detail/${product.id}`} className="w-11/12 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-3" key={product.id}>
                         <img className="p-8 rounded-t-lg object-cover h-96 w-full" src={product.image} alt={product.title} />
                         <div className="px-5 pb-5">
                             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">{product.title}</h5>
