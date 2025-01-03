@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 export default function Navbar() {
     const patname = usePathname();
     const router = useRouter();
-    const { status }: { data: any; status: string; } = useSession();
+    const { data: session, status }: { data: any; status: string; } = useSession();
     
     return (
         <>
@@ -25,6 +25,16 @@ export default function Navbar() {
                                 Profile
                             </li>
                         </Link>
+                        <Link href="/product">
+                            <li className={`mr-6 ${patname === "/product" ? " text-blue-300" : "text-white"} cursor-pointer`}>
+                                Product
+                            </li>
+                        </Link>
+                        <Link href="/store">
+                            <li className={`mr-6 ${patname === "/store" ? " text-blue-300" : "text-white"} cursor-pointer`}>
+                                Store
+                            </li>
+                        </Link>
                         <Link href="/about">
                             <li className={`mr-6 ${patname === "/about" ? " text-blue-300" : "text-white"} cursor-pointer`}>
                                 About
@@ -34,7 +44,10 @@ export default function Navbar() {
                 </div>
                 <div>
                     {status === "authenticated" ? (
+                    <div className="flex">
+                        <h4 className="font-bold text-white mr-3">{session?.user?.fullname}</h4>
                         <button onClick={() => signOut()} className="bg-white rounded-md px-3 text-sm h-7 cursor-pointer">Logout</button>
+                    </div>
                     ) : (
                         <button onClick={() => signIn()} className="bg-white rounded-md px-3 text-sm h-7 cursor-pointer">Login</button>
                     )}

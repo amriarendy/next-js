@@ -1,3 +1,5 @@
+import { login } from "@/lib/firebase/service";
+import { compare } from "bcrypt";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials"
 import { signIn } from "next-auth/react";
@@ -12,27 +14,25 @@ const authOptions: NextAuthOptions = {
             type: "credentials",
             name: "Credentials",
             credentials: {
-                email: { label: "Email", type: "email"},
                 fullname: {label: "Full Name", type: "text"},
+                email: { label: "Email", type: "email"},
                 password: { label: "Password", type: "password"},
             },
             async authorize(credentials) {
-                        const { email, password, fullname} = credentials as {
-                            email: string,
-                            password: string,
-                            fullname: string,
-                        };
-                // const user: any = { id: 1, email: email, password: password, fullname: fullname, };
-                const user: any = {
-                    id: 1,
-                    fullname: "Jhon Doe",
-                    email: "jhon@gmail.com",
-                    role: "admin"
+                const { email, password } = credentials as {
+                    email: string,
+                    password: string,
                 }
+                const user: any = await login({ email });
+                console.log("user: ", password);
                 if (user) {
-                    return user;
+                    const passwordConfirm = await compare(password, user.password);
+                    if (passwordConfirm) {
+                        return user;
+                    }
+                    return null;
                 } else {
-                    return null
+                    return null;
                 }
             }
         }),
