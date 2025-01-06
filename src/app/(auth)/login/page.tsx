@@ -5,7 +5,8 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function LoginPage() {
+export default function LoginPage({ params }: any) {
+    const callbackURL = params.callbackUrl || '/';
     const { push } = useRouter();
     const [ error, setError ] = useState("");
     const [ isLoading, setIsLoading ] = useState(false)
@@ -68,13 +69,19 @@ export default function LoginPage() {
             </div>
       
             <button
-            disabled={isLoading}
-             type="submit" 
-             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors">
+              disabled={isLoading}
+              type="submit" 
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors">
               { isLoading ? "Loading..." : "Login" }
             </button>
+            <hr className="divide-black" />
+            <button
+              onClick={() => signIn('google', { callbackURL, redirect: false })}
+              type="button" 
+              className="w-full bg-red-500 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors">
+                Login With Google
+            </button>
           </form>
-      
           <div className="mt-6 text-center text-sm text-gray-600">
             Don't have an account? 
             <Link href="/register" className="text-indigo-600 hover:text-indigo-500 font-medium"> Sign up</Link>

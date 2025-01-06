@@ -1,4 +1,4 @@
-import { getFirestore, doc, getDocs, collection, getDoc, query, where, addDoc } from "firebase/firestore";
+import { getFirestore, doc, getDocs, collection, getDoc, query, where, addDoc, updateDoc } from "firebase/firestore";
 import app from "./init"
 import bcrypt from "bcrypt";
 
@@ -29,7 +29,7 @@ export async function login(data: { email: string }) {
         id: doc.id,
         ...doc.data(),
     }))
-    console.log("Check: ", user[0]);
+    
     if (user) {
         return user[0];
     } else {
@@ -40,10 +40,11 @@ export async function login(data: { email: string }) {
 export async function register(data: { email: string, fullname: string, password: string, role?: string, provider: string }) {
     const q = query(collection(firestore, "users"), where("email", "==", data.email));
     const snapshot = await getDocs(q);
-    const users = snapshot.docs.map((doc) => ({
+    const user: any = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-    }));if (users.length > 0) {
+    }));
+    if (user.length > 0) {
         return { code: 400, status: false, message: "Email already exists"}
     } else {
         data.password = await bcrypt.hash(data.password, 10);
@@ -63,5 +64,26 @@ export async function register(data: { email: string, fullname: string, password
                 message: "Register failed"
             }
         }
+    }
+}
+
+export async function loginWithGoogle(data: any, callback: any) {
+    const q = query(collection(firestore, "users"), where("email", "==", data.email));
+    const snapshot = await getDocs(q);
+    const user: any = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    }));
+
+    if (user.length > 0) {
+        data.role = user[0].role;
+        await updateDoc(doc(firestore, 'users', user[0].id), data).then(() => {
+           callback({ code: 200, status: true, message: "Success", data: data });
+        });
+    } else {
+       data.role = "member";
+       await addDoc(collection(firestore, "users"), data).then(() => {
+            callback({ code: 200, status: true, message: "Success", data: data });
+       })
     }
 }

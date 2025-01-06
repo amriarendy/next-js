@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 
 export default function ProfilePage() {
-    const { data: session }: { data: any; } = useSession();
+    const { data: session, status }: { data: any; status: string; } = useSession();
     
     return (
         <div>

@@ -2,12 +2,12 @@
 
 import { useSession } from "next-auth/react";
 
-export default function ProfilePage() {
+export default function SettingPage() {
     const { data: session }: { data: any; } = useSession();
     
     return (
         <div>
-            <h1>Profile Page</h1>
+            <h1>Seting Page</h1>
             <h2>{session?.user?.fullname}</h2>
         </div>
     )

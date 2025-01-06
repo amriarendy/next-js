@@ -1,8 +1,8 @@
-import { login } from "@/lib/firebase/service";
+import { login, loginWithGoogle } from "@/lib/firebase/service";
 import { compare } from "bcrypt";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials"
-import { signIn } from "next-auth/react";
+import GoogleProvider from 'next-auth/providers/google'
 
 const authOptions: NextAuthOptions = {
     session: {
@@ -24,7 +24,6 @@ const authOptions: NextAuthOptions = {
                     password: string,
                 }
                 const user: any = await login({ email });
-                console.log("user: ", password);
                 if (user) {
                     const passwordConfirm = await compare(password, user.password);
                     if (passwordConfirm) {
@@ -36,6 +35,10 @@ const authOptions: NextAuthOptions = {
                 }
             }
         }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_OAUTH_CLIENT_ID || '',
+            clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET || '',
+        }),
     ],
     callbacks: {
         async jwt({token, account, profile, user}: any) {
@@ -43,6 +46,25 @@ const authOptions: NextAuthOptions = {
                 token.email = user.email;
                 token.fullname = user.fullname;
                 token.role = user.role;
+            }
+            
+            if (account?.provider === "google") {
+                const data = {
+                    fullname: user.name,
+                    email: user.email,
+                    image: user.image,
+                    type: "google",
+                };
+
+                await loginWithGoogle(data, (result: { code: number, status: boolean, message: boolean, data: any }) => {
+                    if (result.status) {
+                        token.email = result.data.email;
+                        token.fullname = result.data.fullname;
+                        token.image = result.data.image;
+                        token.role = result.data.role;
+                        token.type = result.data.type;
+                    }
+                });
             }
             return token;
         },
