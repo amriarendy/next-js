@@ -1,4 +1,5 @@
 import { getData } from "@/services/products";
+import Image from "next/image";
 import Link from "next/link";
 
 type StorePageProps = { params: { slug: string[] }};
@@ -12,7 +13,7 @@ export default async function StorePage(props: StorePageProps) {
             {products.data.length > 0 &&
                 products.data.map((product: any) => (
                     <Link href={`/store/detail/${product.id}`} className="w-11/12 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-3" key={product.id}>
-                        <img className="p-8 rounded-t-lg object-cover h-96 w-full" src={product.image} alt={product.title} />
+                        <Image src={product.image} alt={product.title} width={500} height={500} loading="lazy" className="p-8 rounded-t-lg object-cover h-96 w-full" />
                         <div className="px-5 pb-5">
                             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white truncate">{product.title}</h5>
                             <div className="flex items-center justify-between mt-3">
