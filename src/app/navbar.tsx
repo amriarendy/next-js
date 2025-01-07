@@ -12,7 +12,7 @@ export default function Navbar() {
     return (
         <>
             <nav className="flex bg-gray-800 py-2 px-5 justify-between">
-                <div className="flex item-center h-100">
+                <div className="flex items-center h-100">
                     <h1 className="text-white">Navbar</h1>
                     <ul className="flex ml-5">
                         <Link href="/">

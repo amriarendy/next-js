@@ -56,12 +56,12 @@ export async function GET(requset: NextRequest) {
         });
     }
 
-    const product = await retriveData('products');
+    const products = await retriveData('products');
 
     return NextResponse.json({ 
         code: 200,
         status: true, 
         message: "success", 
-        data: data
+        data: products
     });
 }
